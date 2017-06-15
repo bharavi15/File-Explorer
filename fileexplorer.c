@@ -28,6 +28,11 @@ void list(char ch[])
 void prevdir(char ch[])
 {
     int x,i,y;
+	if(strlen(ch)<=4)
+    {
+        printf("ALREADY IN ROOT DIRECTORY");
+        return;
+    }
     for(x=1,i=strlen(ch);i>0&&x!=3;i--)
     {
         y=ch[i];

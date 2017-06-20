@@ -28,7 +28,7 @@ void list(char ch[])
 void prevdir(char ch[])
 {
     int x,i,y;
-	if(strlen(ch)<=4)
+    if(strlen(ch)<=4)
     {
         printf("ALREADY IN ROOT DIRECTORY");
         return;
@@ -65,7 +65,11 @@ void opfile()
     int fn,count=1,flag=0;
     strcat(ch5,ch);
     printf("Enter File No. from List::");
-    scanf("%d",&fn);
+    if(!scanf("%d",&fn))
+    {
+        printf("INVALID INPUT!");
+        exit(0);
+    }
     DIR *d;
     struct dirent *dir;
     d = opendir(ch);
@@ -75,7 +79,7 @@ void opfile()
 	  {
         if(fn==count)
         {strcat(ch5,dir->d_name);
-        strcat(ch5,"\"");printf("%s",ch5);
+        strcat(ch5,"\"");
          system(ch5);flag=1;
         break;
         }
@@ -89,12 +93,12 @@ void opfile()
 }
 int main()
 {
-	 int a;
+	 int a,b;
      do
-	 {
+     {
 	 printf("\nCurrent Directory:%s\n",ch);
 	 printf("1.Change Root Directory\n2.List items\n3.Change Directory\n4.Go back to Previous Directory\n5.Open File\n6.Exit\nEnter Your Choice::");
-     scanf("%d",&a);
+     if(scanf("%d",&a))
      switch(a)
 	 {
 	 case 1:chrdir();
@@ -110,6 +114,11 @@ int main()
 	 case 6:break;
 	 default:printf("\nWRONG CHOICE\n");
 	 }
+	 else
+    {
+     printf("INVALID INPUT!");
+     exit(0);
+    }
 	 }while(a!=6);
 	 return(0);
 }
